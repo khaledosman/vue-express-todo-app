@@ -3,31 +3,61 @@ import { Todo } from '../../models/Todo'
 export const todosRouter: Router = Router()
 
 todosRouter.get('/', async (req, res) => {
-  let {limit, offset} = req.query
-if(!limit || !offset) {
-  res.status(400).json({error: "Limit and Offset query params are required"})
-}
-  const todos = await Todo.findAndCountAll({ 
-    limit: Number(limit), 
-    offset: Number(offset) 
-  })
-  res.send(todos)
+  try {
+
+    let { limit, offset } = req.query
+    if (!limit || !offset) {
+      res.status(400).json({ error: "Limit and Offset query params are required" })
+    }
+    const todos = await Todo.findAndCountAll({
+      limit: Number(limit),
+      offset: Number(offset)
+    })
+    res.send(todos)
+  } catch (err) {
+    res.status(500).send(err)
+  }
 })
 
 todosRouter.post('/', async (req, res) => {
-const todo = req.body
-const newTodo = await Todo.create(todo)
-res.send(newTodo)
+  try {
+
+    const todo = req.body
+    const newTodo = await Todo.create(todo)
+    res.send(newTodo)
+  } catch (err) {
+    res.status(500).send(err)
+  }
 })
 
 todosRouter.patch('/:todoId', async (req, res) => {
-  const update = req.body
-  console.log(req.params)
- await Todo.update(update, {
-  where: {
-    id: req.params.todoId
+  try {
+
+    const update = req.body
+    console.log(req.params)
+    await Todo.update(update, {
+      where: {
+        id: req.params.todoId
+      }
+    })
+    const updated = await Todo.findByPk(req.params.todoId)
+    res.send(updated)
+  } catch (err) {
+    res.status(500).send(err)
   }
 })
-const updated = await Todo.findByPk(req.params.todoId)
-  res.send(updated)
+
+todosRouter.delete('/:todoId', async (req, res) => {
+  try {
+
+    await Todo.destroy({
+      where: {
+        id: req.params.todoId
+      }
+    })
+    res.send("deleted successfully")
+
+  } catch (err) {
+    res.status(500).send(err)
+  }
 })

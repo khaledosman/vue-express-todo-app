@@ -16,7 +16,7 @@ export const app = express()
 app.use(compression())
 app.use(helmet())
 app.use(express.json())
-app.use(cors({ credentials: true, origin: true }))
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', apiRouter)

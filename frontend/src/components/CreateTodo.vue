@@ -39,7 +39,7 @@ export default {
       if (this.titleText.length) {
         const title = this.titleText;
         this.$emit("create-todo", title);
-        this.newTodoText = "";
+        this.titleText = "";
       }
       this.isCreating = false;
     }

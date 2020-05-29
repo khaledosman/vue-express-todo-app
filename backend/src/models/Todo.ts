@@ -8,7 +8,7 @@ Todo.init({
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
-  text: DataTypes.STRING,
+  title: DataTypes.STRING,
   isCompleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
