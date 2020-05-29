@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const API_URL = 'http://localhost:8080/api'
-export function getTodos ({ limit, offset }) {
-  return axios.get(`${API_URL}/todos?limit=${limit}&offset=${offset}`)
+export function getTodos ({ limit, offset, showCompleted }) {
+  return axios.get(`${API_URL}/todos?limit=${limit}&offset=${offset}&showCompleted=${showCompleted}`)
     .then(res => res.data)
 }
 

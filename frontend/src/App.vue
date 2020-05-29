@@ -11,6 +11,7 @@
       @delete-todo="deleteTodo"
       @edit-todo="editTodo"
     />
+    <button type="button" @click="fetchTodos">Fetch more todos</button>
     <CreateTodo @create-todo="createTodo" />
   </div>
 </template>
@@ -39,17 +40,21 @@ export default {
       this.todos = [...this.todos, newTodo];
     },
     async fetchTodos() {
-      const result = await getTodos({ limit: this.limit, offset: this.offset });
+      const result = await getTodos({
+        limit: this.limit,
+        offset: this.offset,
+        showCompleted: this.showCompleted
+      });
       this.count = result.count;
-      this.todos = [...this.todos, ...result.rows];
+      this.todos =
+        this.offset === 0 ? result.rows : [...this.todos, ...result.rows];
       this.offset = this.limit + this.offset;
     },
-    toggleCompleted() {
-      this.showCompleted != this.showCompleted;
-      this.todos = this.todos.filter(todo => {
-        return this.showCompleted === true || !todo.isCompleted;
-      });
-      console.log(this.todos);
+    async toggleCompleted() {
+      this.showCompleted = !this.showCompleted;
+      this.offset = 0;
+      this.todos = [];
+      await this.fetchTodos();
     },
     async completeTodo(todo) {
       const updatedTodo = await updateTodo(todo.id, {
@@ -58,7 +63,7 @@ export default {
 
       const todoIndex = this.todos.findIndex(t => t.id === updatedTodo.id);
       this.todos = [
-        ...this.todos.slice(0, todoIndex - 1),
+        ...this.todos.slice(0, todoIndex),
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];

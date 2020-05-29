@@ -5,14 +5,23 @@ export const todosRouter: Router = Router()
 todosRouter.get('/', async (req, res) => {
   try {
 
-    let { limit, offset } = req.query
+    let { limit, offset, showCompleted } = req.query
+    console.log({ showCompleted })
+    let _showCompleted = showCompleted === "false" ? false : true
     if (!limit || !offset) {
       res.status(400).json({ error: "Limit and Offset query params are required" })
     }
-    const todos = await Todo.findAndCountAll({
+    console.log({ _showCompleted })
+    let query = {
       limit: Number(limit),
-      offset: Number(offset)
-    })
+      offset: Number(offset),
+      ...(_showCompleted === false && {
+        where: {
+          isCompleted: false
+        }
+      })
+    }
+    const todos = await Todo.findAndCountAll(query)
     res.send(todos)
   } catch (err) {
     res.status(500).send(err)
