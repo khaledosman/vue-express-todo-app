@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <input type="checkbox" @click="toggleCompleted" /> show completed
+    <input type="checkbox" @click="toggleCompleted" :checked="showCompleted" /> show completed
     <TodoList
       :todos="todos"
       @complete-todo="completeTodo"
@@ -24,15 +24,19 @@ export default {
     createTodo(title) {
       this.todos.push({
         title,
-        done: false
+        isCompleted: false
       });
     },
     toggleCompleted() {
       this.showCompleted != this.showCompleted;
+      this.todos = this.todos.filter(todo => {
+        return this.showCompleted === true || !todo.isCompleted;
+      });
+      console.log(this.todos);
     },
     completeTodo(todo) {
       const todoIndex = this.todos.findIndex(t => t.id === todo.id);
-      this.todos[todoIndex].done = !this.todos[todoIndex].done;
+      this.todos[todoIndex].isCompleted = !this.todos[todoIndex].isCompleted;
     },
     deleteTodo(todo) {
       this.todos = this.todos.filter(t => t.id !== todo.id);
@@ -56,22 +60,22 @@ export default {
         {
           id: 1,
           title: "Todo A",
-          done: false
+          isCompleted: false
         },
         {
           id: 2,
           title: "Todo B",
-          done: true
+          isCompleted: true
         },
         {
           id: 3,
           title: "Todo C",
-          done: false
+          isCompleted: false
         },
         {
           id: 4,
           title: "Todo D",
-          done: false
+          isCompleted: false
         }
       ]
     };

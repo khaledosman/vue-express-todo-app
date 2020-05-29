@@ -35,12 +35,12 @@ export default {
   computed: {
     completedTodos() {
       return this.todos.filter(todo => {
-        return todo.done === true;
+        return todo.isCompleted === true;
       }).length;
     },
     pendingTodos() {
       return this.todos.filter(todo => {
-        return todo.done === false;
+        return todo.isCompleted === false;
       }).length;
     }
   }

@@ -1,8 +1,13 @@
 <template>
   <div class="card">
     <div class="content" v-show="!isEditing">
-      <div :class="{'is-completed': todo.done}">
-        <input type="checkbox" class="header" @click="completeTodo(todo)" :checked="todo.done" />
+      <div :class="{'is-completed': todo.isCompleted}">
+        <input
+          type="checkbox"
+          class="header"
+          @click="completeTodo(todo)"
+          :checked="todo.isCompleted"
+        />
         {{ todo.title }}
       </div>
       <div class="extra content">
