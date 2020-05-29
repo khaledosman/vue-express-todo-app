@@ -83,8 +83,9 @@ export default {
     },
     async editTodo({ oldTodo, newTodo }) {
       const updatedTodo = await updateTodo(oldTodo.id, newTodo);
+      const todoIndex = this.todos.findIndex(t => t.id === updatedTodo.id);
       this.todos = [
-        ...this.todos.slice(0, todoIndex - 1),
+        ...this.todos.slice(0, todoIndex),
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];

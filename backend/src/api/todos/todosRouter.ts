@@ -15,7 +15,7 @@ todosRouter.get('/', async (req, res) => {
     const todos = await Todo.findAndCountAll({
       limit: Number(limit),
       offset: Number(offset),
-      order: ["createdAt", "DESC"],
+      // order: ["createdAt", "DESC"],
       ...(_showCompleted === false && {
         where: {
           isCompleted: false

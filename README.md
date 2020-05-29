@@ -24,9 +24,10 @@
 5. Double check performance and security best practices for postgresql & sequelize.
 6. Add some types/interfaces
 7. Disable forced sync in production
+8. Make TODO CRUD operations reusable by moving them into the model class as static/helper methods
 
 #### Frontned
-1. using $emit to create an event bus through multiple components is not optimal, might be better to use vuex for state management instead
+1. using $emit to create an event bus through multiple components is not optimal, might be better to use vuex for state management instead.. that should also help with updating the list and count after CRUD operations
 2. Add styles
 3. show some loading states when data is being loaded and disable buttons when loading
 4. Implement some Input/Form validation
