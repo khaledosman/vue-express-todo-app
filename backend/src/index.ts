@@ -24,6 +24,7 @@ app.get('/', (req, res) => res.send({ message: 'Hello world!' }))
 
 const server = http.createServer(app)
 console.log('connecting to db')
+// graceful start
 sequelize.authenticate()
   .then(async () => {
     await sequelize.sync({ force: true })
@@ -31,6 +32,7 @@ sequelize.authenticate()
     server.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}!`))
   })
 
+// graceful shutdown
 const endSignals = ['SIGINT', 'SIGTERM', 'SIGQUIT']
 endSignals.forEach((signal) => process.on(signal, () => {
   console.log(`end signal ${signal} received, closing server`)
