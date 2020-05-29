@@ -36,7 +36,6 @@ export default {
       this.isCreating = false;
     },
     sendForm() {
-      debugger;
       if (this.titleText.length) {
         const title = this.titleText;
         this.$emit("create-todo", title);

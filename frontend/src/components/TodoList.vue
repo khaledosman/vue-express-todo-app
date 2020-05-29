@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>Completed Tasks: {{completedTodos}}</p>
-    <p>Pending Tasks: {{pendingTodos}}</p>
+    <!-- <p>Completed Tasks: {{completedTodos}}</p>
+    <p>Pending Tasks: {{pendingTodos}}</p>-->
     <todo
       v-for="todo in todos"
       :key="todo.id"

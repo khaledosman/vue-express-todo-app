@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <input type="checkbox" @click="toggleCompleted" /> show completed
     <TodoList
       :todos="todos"
       @complete-todo="completeTodo"
@@ -26,6 +27,9 @@ export default {
         done: false
       });
     },
+    toggleCompleted() {
+      this.showCompleted != this.showCompleted;
+    },
     completeTodo(todo) {
       const todoIndex = this.todos.findIndex(t => t.id === todo.id);
       this.todos[todoIndex].done = !this.todos[todoIndex].done;
@@ -45,6 +49,9 @@ export default {
   },
   data() {
     return {
+      showCompleted: true,
+      skip: 0,
+      count: 10,
       todos: [
         {
           id: 1,

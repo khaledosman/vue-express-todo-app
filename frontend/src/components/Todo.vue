@@ -1,17 +1,16 @@
 <template>
   <div class="card">
     <div class="content" v-show="!isEditing">
-      <div
-        class="header"
-        :class="{'is-completed': todo.done}"
-        @click="completeTodo(todo)"
-      >{{ todo.title }}</div>
+      <div :class="{'is-completed': todo.done}">
+        <input type="checkbox" class="header" @click="completeTodo(todo)" :checked="todo.done" />
+        {{ todo.title }}
+      </div>
       <div class="extra content">
         <span class="right floated icon" @click="showForm(todo)">
           <i class="icon">edit</i>
         </span>
         <span class="right floated icon" @click="deleteTodo(todo)">
-          <i class="icon">x</i>
+          <i class="icon">delete</i>
         </span>
       </div>
     </div>
