@@ -8,6 +8,7 @@
       :todo="todo"
       @delete-todo="deleteTodo"
       @complete-todo="completeTodo"
+      @edit-todo="editTodo"
     ></todo>
   </div>
 </template>
@@ -26,6 +27,9 @@ export default {
     },
     completeTodo(todo) {
       this.$emit("complete-todo", todo);
+    },
+    editTodo({ oldTodo, newTodo }) {
+      this.$emit("edit-todo", { oldTodo, newTodo });
     }
   },
   computed: {

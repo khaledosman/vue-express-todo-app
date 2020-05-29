@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <TodoList :todos="todos" @complete-todo="completeTodo" @delete-todo="deleteTodo" />
+    <TodoList
+      :todos="todos"
+      @complete-todo="completeTodo"
+      @delete-todo="deleteTodo"
+      @edit-todo="editTodo"
+    />
     <CreateTodo @create-todo="createTodo" />
   </div>
 </template>
@@ -27,6 +32,15 @@ export default {
     },
     deleteTodo(todo) {
       this.todos = this.todos.filter(t => t.id !== todo.id);
+    },
+    editTodo({ oldTodo, newTodo }) {
+      this.todos = this.todos.map(todo => {
+        if (todo.id !== oldTodo.id) {
+          return todo;
+        } else {
+          return { ...oldTodo, ...newTodo };
+        }
+      });
     }
   },
   data() {
