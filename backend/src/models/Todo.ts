@@ -13,4 +13,4 @@ Todo.init({
     type: DataTypes.BOOLEAN,
     defaultValue: false
   }
-}, { sequelize, modelName: 'user' })
+}, { sequelize, modelName: 'todo' })

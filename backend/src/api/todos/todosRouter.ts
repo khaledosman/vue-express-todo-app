@@ -12,16 +12,16 @@ todosRouter.get('/', async (req, res) => {
       res.status(400).json({ error: "Limit and Offset query params are required" })
     }
     console.log({ _showCompleted })
-    let query = {
+    const todos = await Todo.findAndCountAll({
       limit: Number(limit),
       offset: Number(offset),
+      order: ["createdAt", "DESC"],
       ...(_showCompleted === false && {
         where: {
           isCompleted: false
         }
-      })
-    }
-    const todos = await Todo.findAndCountAll(query)
+      }),
+    })
     res.send(todos)
   } catch (err) {
     res.status(500).send(err)

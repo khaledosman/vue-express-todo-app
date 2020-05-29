@@ -43,7 +43,7 @@ export default {
       });
       this.todos = [...this.todos, newTodo];
       this.count++;
-      // this.fetchTodos();
+      this.fetchTodos();
     },
     async fetchTodos() {
       const result = await getTodos({
@@ -73,12 +73,12 @@ export default {
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
-      // this.fetchTodos();
+      this.fetchTodos();
     },
     async deleteTodo(todo) {
       await deleteTodo(todo.id);
       this.todos = this.todos.filter(t => t.id !== todo.id);
-      // this.fetchTodos();
+      this.fetchTodos();
       this.count--;
     },
     async editTodo({ oldTodo, newTodo }) {
@@ -88,7 +88,7 @@ export default {
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
-      // this.fetchTodos();
+      this.fetchTodos();
     }
   },
   data() {
