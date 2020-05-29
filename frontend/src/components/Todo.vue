@@ -10,11 +10,11 @@
         />
         {{ todo.title }}
       </div>
-      <div class="extra content">
-        <span class="right floated icon" @click="showForm(todo)">
+      <div class="content">
+        <span class="icon" @click="showForm(todo)">
           <i class="icon">edit</i>
         </span>
-        <span class="right floated icon" @click="deleteTodo(todo)">
+        <span class="icon" @click="deleteTodo(todo)">
           <i class="icon">delete</i>
         </span>
       </div>
@@ -70,5 +70,9 @@ export default {
 }
 .card {
   border: solid 1px #e3e3e3;
+}
+
+.icon {
+  margin: 2px;
 }
 </style>

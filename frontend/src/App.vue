@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div>{{count}} Todos available</div>
-    <div v-if="count > 0">
+    <div>{{count}} Todos available, showing {{todos.length}}</div>
+    <div>
       <input type="checkbox" @click="toggleCompleted" :checked="showCompleted" />
       show completed
     </div>
@@ -11,7 +11,11 @@
       @delete-todo="deleteTodo"
       @edit-todo="editTodo"
     />
-    <button type="button" @click="fetchTodos">Fetch more todos</button>
+    <button
+      v-if="count > 0 && todos.length < count"
+      type="button"
+      @click="fetchTodos"
+    >Fetch more todos</button>
     <CreateTodo @create-todo="createTodo" />
   </div>
 </template>
@@ -38,6 +42,8 @@ export default {
         isCompleted: false
       });
       this.todos = [...this.todos, newTodo];
+      this.count++;
+      // this.fetchTodos();
     },
     async fetchTodos() {
       const result = await getTodos({
@@ -67,10 +73,13 @@ export default {
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
+      // this.fetchTodos();
     },
     async deleteTodo(todo) {
       await deleteTodo(todo.id);
       this.todos = this.todos.filter(t => t.id !== todo.id);
+      // this.fetchTodos();
+      this.count--;
     },
     async editTodo({ oldTodo, newTodo }) {
       const updatedTodo = await updateTodo(oldTodo.id, newTodo);
@@ -79,6 +88,7 @@ export default {
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
+      // this.fetchTodos();
     }
   },
   data() {
