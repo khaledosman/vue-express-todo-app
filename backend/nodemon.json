@@ -6,8 +6,8 @@
     "node_modules"
   ],
   "watch": [
-    "src/**/*.ts"
+    "src"
   ],
-  "exec": "npm run-script lint && npm run-script start",
+  "exec": "npm start",
   "ext": "ts"
 }

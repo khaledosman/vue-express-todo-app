@@ -1,7 +1,8 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '../db'
 
-export class Todo extends Model {}
+export class Todo extends Model {
+}
 Todo.init({
   id: {
     type: DataTypes.UUID,

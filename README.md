@@ -19,12 +19,9 @@
 #### Backend
 1. Better error handling
 2. implement input validation, perhaps a library like `@hapi/joi` would be beneficial
-3. Fix nodemon setup to automatically restart the server on changes
-4. better eslint/standard setup
-5. Double check performance and security best practices for postgresql & sequelize, like using transactions, indexes and connection pooling.
-6. Add some types/interfaces
-7. Disable forced sync in production
-8. Make TODO CRUD operations reusable by moving them into the model class as static/helper methods
+3. Add some types/interfaces
+4. Make TODO CRUD operations reusable by moving them into the model class as static/helper methods
+5. add some seeders and/or use sequelize-cli
 
 #### Frontned
 1. using $emit to create an event bus through multiple components is not optimal, might be better to use vuex for state management instead.. that should also help with updating the list and count after CRUD operations
@@ -33,4 +30,3 @@
 4. Implement some Input/Form validation
 5. Show confirmation before deleting a task
 6. Error handling in case of server errors
-7. Add more fields to the todo, like date/time and/or project.
