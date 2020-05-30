@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div>{{count}} Todos available, showing {{todos.length}}</div>
+    <div>{{count}} Todos available, showing {{filteredTodos.length}}</div>
     <div>
       <button
         class="fetch-more"
-        v-if="count > 0 && todos.length < count"
+        v-if="count > 0 && filteredTodos.length < count"
         type="button"
         @click="fetchTodos"
       >Fetch more todos</button>
@@ -14,7 +14,7 @@
       show completed
     </div>
     <TodoList
-      :todos="todos"
+      :todos="filteredTodos"
       @complete-todo="completeTodo"
       @delete-todo="deleteTodo"
       @edit-todo="editTodo"
@@ -48,11 +48,11 @@ export default {
     };
   },
   computed: {
-    // filteredTodos() {
-    //   return this.todos.filter(todo =>
-    //     this.showCompleted ? true : !todo.isCompleted
-    //   );
-    // }
+    filteredTodos() {
+      return this.todos.filter(todo =>
+        this.showCompleted ? true : !todo.isCompleted
+      );
+    }
   },
   async mounted() {
     await this.fetchTodos();
