@@ -30,3 +30,5 @@
 4. Implement some Input/Form validation
 5. Error handling in case of server errors
 6. With too many todos, rendering might get slow as you fetch more data.. use a virtual scrolling library to only render elements being shown instead of all of them
+7. Improve usability, no need for confirm/cancel buttons on create and edit.
+8. Use fontawesome icons instead for edit/delete buttons

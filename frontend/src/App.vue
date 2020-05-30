@@ -2,6 +2,14 @@
   <div id="app">
     <div>{{count}} Todos available, showing {{todos.length}}</div>
     <div>
+      <button
+        class="fetch-more"
+        v-if="count > 0 && todos.length < count"
+        type="button"
+        @click="fetchTodos"
+      >Fetch more todos</button>
+    </div>
+    <div class="filter">
       <input type="checkbox" @click="toggleCompleted" :checked="showCompleted" />
       show completed
     </div>
@@ -11,11 +19,6 @@
       @delete-todo="deleteTodo"
       @edit-todo="editTodo"
     />
-    <button
-      v-if="count > 0 && todos.length < count"
-      type="button"
-      @click="fetchTodos"
-    >Fetch more todos</button>
     <CreateTodo @create-todo="createTodo" />
   </div>
 </template>
@@ -44,6 +47,13 @@ export default {
       todos: []
     };
   },
+  computed: {
+    // filteredTodos() {
+    //   return this.todos.filter(todo =>
+    //     this.showCompleted ? true : !todo.isCompleted
+    //   );
+    // }
+  },
   async mounted() {
     await this.fetchTodos();
   },
@@ -55,7 +65,7 @@ export default {
       });
       this.todos = [...this.todos, newTodo];
       this.count++;
-      this.fetchTodos();
+      // this.fetchTodos();
     },
     async fetchTodos() {
       const result = await getTodos({
@@ -67,8 +77,8 @@ export default {
       // if fetching more data, append to the list, if the filter changed clear the results and only show the new data
       this.todos =
         this.offset === 0 ? result.rows : [...this.todos, ...result.rows];
-      this.offset = this.limit + this.offset;
       // update the offset for loading the next page
+      this.offset += this.limit;
     },
     async toggleCompleted() {
       this.showCompleted = !this.showCompleted;
@@ -76,10 +86,10 @@ export default {
       this.todos = [];
       await this.fetchTodos();
     },
-    completeTodo(todo) {
-      return this.editTodo({
+    async completeTodo(todo) {
+      await this.editTodo({
         oldTodo: todo,
-        newTodo: { isCompleted: !todo.isCompleted }
+        newTodo: { ...todo, isCompleted: !todo.isCompleted }
       });
     },
     async deleteTodo(todo) {
@@ -92,7 +102,7 @@ export default {
       await deleteTodo(todo.id);
       this.todos = this.todos.filter(t => t.id !== todo.id);
       this.count--;
-      this.fetchTodos();
+      // this.fetchTodos();
     },
     async editTodo({ oldTodo, newTodo }) {
       const updatedTodo = await updateTodo(oldTodo.id, newTodo);
@@ -103,7 +113,7 @@ export default {
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
 
-      this.fetchTodos();
+      // this.fetchTodos();
     }
   }
 };
@@ -117,5 +127,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  box-sizing: border-box;
+}
+.filter {
+  float: right;
+}
+.fetch-more {
+  float: left;
 }
 </style>

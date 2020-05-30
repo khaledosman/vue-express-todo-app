@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list">
     <!-- <p>Completed Tasks: {{completedTodos}}</p>
     <p>Pending Tasks: {{pendingTodos}}</p>-->
     <todo
@@ -47,4 +47,12 @@ export default {
 };
 </script>
 <style scoped>
+.list {
+  margin: 5px;
+  padding: 2px;
+  width: 100%;
+  max-height: 300px;
+  overflow: auto;
+  border: solid 1px #e3e3e3;
+}
 </style>

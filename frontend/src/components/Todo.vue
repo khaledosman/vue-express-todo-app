@@ -71,5 +71,6 @@ export default {
 
 .icon {
   margin: 2px;
+  cursor: pointer;
 }
 </style>

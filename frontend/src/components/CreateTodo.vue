@@ -1,20 +1,24 @@
 <template>
   <div>
-    <button class="button icon" @click="openForm" v-show="!isCreating">
-      <i class="icon">Create Todo</i>
-    </button>
-    <div v-show="isCreating">
+    <div>
       <div class="content">
-        <div class="form">
+        <form class="form" @submit="sendForm">
           <div class="field">
-            <label>Title</label>
-            <input v-model="titleText" type="text" ref="title" defaultValue />
+            <!-- <label>Title</label> -->
+            <input
+              v-model="todoForm.title"
+              style="text-align: center"
+              placeholder="Add Todo"
+              type="text"
+              ref="title"
+              defaultValue
+            />
           </div>
-          <div class="button">
+          <!-- <div class="button">
             <button class="button" @click="sendForm">Create</button>
             <button class="button" @click="closeForm">Cancel</button>
-          </div>
-        </div>
+          </div>-->
+        </form>
       </div>
     </div>
   </div>
@@ -24,24 +28,20 @@
 export default {
   data() {
     return {
-      titleText: "",
-      isCreating: false
+      todoForm: {
+        title: ""
+      }
     };
   },
   methods: {
-    openForm() {
-      this.isCreating = true;
-    },
-    closeForm() {
-      this.isCreating = false;
-    },
-    sendForm() {
-      if (this.titleText.length) {
-        const title = this.titleText;
+    sendForm(e) {
+      e.preventDefault();
+
+      if (this.todoForm.title.length) {
+        const title = this.todoForm.title;
         this.$emit("create-todo", title);
-        this.titleText = "";
+        this.todoForm = { title: "" };
       }
-      this.isCreating = false;
     }
   }
 };
