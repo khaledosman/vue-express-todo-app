@@ -6,9 +6,9 @@ import helmet from 'helmet'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import http from 'http'
-config()
 import { apiRouter } from './api/apiRouter'
 import { sequelize } from './db'
+config()
 
 export const app = express()
 
@@ -27,7 +27,7 @@ console.log('connecting to db')
 // graceful start
 sequelize.authenticate()
   .then(async () => {
-    await sequelize.sync({ force: true })
+    await sequelize.sync({ force: process.env.NODE_ENV !== 'production' })
     console.log('connected to db successfully')
     server.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}!`))
   })

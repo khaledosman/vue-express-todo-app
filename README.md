@@ -21,7 +21,7 @@
 2. implement input validation, perhaps a library like `@hapi/joi` would be beneficial
 3. Fix nodemon setup to automatically restart the server on changes
 4. better eslint/standard setup
-5. Double check performance and security best practices for postgresql & sequelize.
+5. Double check performance and security best practices for postgresql & sequelize, like using transactions, indexes and connection pooling.
 6. Add some types/interfaces
 7. Disable forced sync in production
 8. Make TODO CRUD operations reusable by moving them into the model class as static/helper methods
