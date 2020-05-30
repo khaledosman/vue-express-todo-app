@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 const API_URL = 'http://localhost:8080/api'
+
+// TODO maybe make a Todo class with static functions
 export function getTodos ({ limit, offset, showCompleted }) {
   return axios.get(`${API_URL}/todos?limit=${limit}&offset=${offset}&showCompleted=${showCompleted}`)
     .then(res => res.data)

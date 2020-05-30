@@ -1,18 +1,18 @@
 <template>
-  <div class="ui basic content center aligned segment">
-    <button class="ui basic button icon" @click="openForm" v-show="!isCreating">
-      <i class="plus icon">Create Todo</i>
+  <div>
+    <button class="button icon" @click="openForm" v-show="!isCreating">
+      <i class="icon">Create Todo</i>
     </button>
-    <div class="ui centered card" v-show="isCreating">
+    <div v-show="isCreating">
       <div class="content">
-        <div class="ui form">
+        <div class="form">
           <div class="field">
             <label>Title</label>
             <input v-model="titleText" type="text" ref="title" defaultValue />
           </div>
-          <div class="ui two button attached buttons">
-            <button class="ui basic blue button" @click="sendForm">Create</button>
-            <button class="ui basic red button" @click="closeForm">Cancel</button>
+          <div class="button">
+            <button class="button" @click="sendForm">Create</button>
+            <button class="button" @click="closeForm">Cancel</button>
           </div>
         </div>
       </div>
@@ -46,3 +46,5 @@ export default {
   }
 };
 </script>
+<style scoped>
+</style>

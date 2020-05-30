@@ -35,6 +35,18 @@ export default {
     TodoList,
     CreateTodo
   },
+  data() {
+    return {
+      showCompleted: true,
+      offset: 0,
+      limit: 3,
+      count: 0,
+      todos: []
+    };
+  },
+  async mounted() {
+    await this.fetchTodos();
+  },
   methods: {
     async createTodo(title) {
       const newTodo = await createTodo({
@@ -52,9 +64,11 @@ export default {
         showCompleted: this.showCompleted
       });
       this.count = result.count;
+      // if fetching more data, append to the list, if the filter changed clear the results and only show the new data
       this.todos =
         this.offset === 0 ? result.rows : [...this.todos, ...result.rows];
       this.offset = this.limit + this.offset;
+      // update the offset for loading the next page
     },
     async toggleCompleted() {
       this.showCompleted = !this.showCompleted;
@@ -62,24 +76,23 @@ export default {
       this.todos = [];
       await this.fetchTodos();
     },
-    async completeTodo(todo) {
-      const updatedTodo = await updateTodo(todo.id, {
-        isCompleted: !todo.isCompleted
+    completeTodo(todo) {
+      return this.editTodo({
+        oldTodo: todo,
+        newTodo: { isCompleted: !todo.isCompleted }
       });
-
-      const todoIndex = this.todos.findIndex(t => t.id === updatedTodo.id);
-      this.todos = [
-        ...this.todos.slice(0, todoIndex),
-        updatedTodo,
-        ...this.todos.slice(todoIndex + 1, this.todos.length)
-      ];
-      this.fetchTodos();
     },
     async deleteTodo(todo) {
+      const isConfirmed = window.confirm(
+        `Are you sure you want to delete ${todo.title}?`
+      );
+      if (!isConfirmed) {
+        return;
+      }
       await deleteTodo(todo.id);
       this.todos = this.todos.filter(t => t.id !== todo.id);
-      this.fetchTodos();
       this.count--;
+      this.fetchTodos();
     },
     async editTodo({ oldTodo, newTodo }) {
       const updatedTodo = await updateTodo(oldTodo.id, newTodo);
@@ -89,20 +102,9 @@ export default {
         updatedTodo,
         ...this.todos.slice(todoIndex + 1, this.todos.length)
       ];
+
       this.fetchTodos();
     }
-  },
-  data() {
-    return {
-      showCompleted: true,
-      offset: 0,
-      limit: 3,
-      count: 0,
-      todos: []
-    };
-  },
-  async mounted() {
-    await this.fetchTodos();
   }
 };
 </script>

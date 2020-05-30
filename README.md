@@ -28,5 +28,5 @@
 2. Add styles
 3. show some loading states when data is being loaded and disable buttons when loading
 4. Implement some Input/Form validation
-5. Show confirmation before deleting a task
-6. Error handling in case of server errors
+5. Error handling in case of server errors
+6. With too many todos, rendering might get slow as you fetch more data.. use a virtual scrolling library to only render elements being shown instead of all of them

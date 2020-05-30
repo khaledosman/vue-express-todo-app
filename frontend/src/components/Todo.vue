@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="content" v-show="!isEditing">
+    <div class="content" v-if="!isEditing">
       <div :class="{'is-completed': todo.isCompleted}">
         <input
           type="checkbox"
@@ -19,8 +19,8 @@
         </span>
       </div>
     </div>
-    <div v-show="isEditing">
-      <input type="text" :defaultValue="todo.title" v-model="editForm.title" />
+    <div v-if="isEditing">
+      <input type="text" :defaultValue="todo.title" v-model="todoForm.title" />
       <button type="button" @click="editTodo(todo)">Confirm</button>
       <button type="button" @click="hideForm">Cancel</button>
     </div>
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       isEditing: false,
-      editForm: {
+      todoForm: {
         ...this.todo
       }
     };
@@ -48,7 +48,7 @@ export default {
     editTodo(todo) {
       this.$emit("edit-todo", {
         oldTodo: todo,
-        newTodo: this.editForm
+        newTodo: this.todoForm
       });
       this.hideForm();
     },
@@ -57,9 +57,6 @@ export default {
     },
     completeTodo(todo) {
       this.$emit("complete-todo", todo);
-    },
-    onBlur(e) {
-      console.log(e, this.editForm);
     }
   }
 };
