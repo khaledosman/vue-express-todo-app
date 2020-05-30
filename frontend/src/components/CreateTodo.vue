@@ -8,7 +8,7 @@
             <input
               v-model="todoForm.title"
               style="text-align: center"
-              placeholder="Add Todo"
+              placeholder="Add a new todo"
               type="text"
               ref="title"
               defaultValue
