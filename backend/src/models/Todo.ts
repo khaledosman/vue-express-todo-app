@@ -6,11 +6,16 @@ Todo.init({
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false
   },
-  title: DataTypes.STRING,
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   isCompleted: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
+    allowNull: false
   }
 }, { sequelize, modelName: 'todo' })
