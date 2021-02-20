@@ -28,9 +28,10 @@ const server = http.createServer(app)
 
 // graceful start
 console.log('connecting to db')
-console.log('connected to db successfully')
 initDb()
   .then(() => {
+    console.log('connected to db successfully')
+
     server.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}!`))
   })
 
