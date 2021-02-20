@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "yarn serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint",
+    "start": "yarn serve"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -17,11 +19,14 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.11",
+    "@vue/cli-plugin-e2e-cypress": "~4.5.11",
     "@vue/cli-plugin-eslint": "~4.5.11",
     "@vue/cli-plugin-pwa": "~4.5.11",
+    "@vue/cli-plugin-unit-jest": "~4.5.11",
     "@vue/cli-service": "~4.5.11",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-standard": "^6.0.0",
+    "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.20.0",
     "eslint-plugin-import": "^2.22.1",
@@ -29,7 +34,9 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.6.0",
-    "lint-staged": "^10.5.4"
+    "lint-staged": "^10.5.4",
+    "typescript": "~4.1.5",
+    "vue-jest": "^5.0.0-0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:8080/api'
+const API_URL = `${process.env.VUE_APP_BACKEND_URL}/api`
 
 // TODO maybe make a Todo class with static functions
 export function getTodos ({ limit, offset, showCompleted }) {
