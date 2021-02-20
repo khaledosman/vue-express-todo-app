@@ -1,6 +1,6 @@
 
 # FROM node:latest
-FROM keymetrics/pm2:latest-alpine
+FROM node:lts-alpine
 
 # Set the working directory to /todoapp
 WORKDIR /todoapp
@@ -11,6 +11,8 @@ COPY . /todoapp
 # Install any needed packages specified in requirements.txt
 # ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install
+RUN npm install pm2 -g
+
 RUN pm2 install typescript
 
 # Make port 3000 available to the world outside this container
@@ -24,4 +26,4 @@ ENV PORT 8000
 # Show current folder structure in logs
 RUN ls -al -R
 
-CMD [ "pm2-runtime", "index.ts" ]
+CMD [ "pm2-runtime", "src/index.ts" ]

@@ -1,4 +1,7 @@
 const endSignals = ['SIGINT', 'SIGTERM', 'SIGQUIT']
+
+// close the server to avoid more incomin requests after the existing ones are fullfilled then close
+// db connection to avoid race conditions / potential response errors or unfulfilled requests
 export function handleGracefulShutdown (server, sequelize) {
   endSignals.forEach((signal) => process.on(signal, () => {
     console.log(`end signal ${signal} received, closing server`)

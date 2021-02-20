@@ -9,7 +9,10 @@ services:
     ports:
       - 5433:5432
   # backend:
+  #   depends_on: ["database"]
   #   build: .
+  #   env_file:
+  #     - .env
   #   ports:
   #     - 8000:8000
     
