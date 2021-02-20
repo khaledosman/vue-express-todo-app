@@ -10,7 +10,8 @@ interface GetTodosOptions {
 
 interface CreateTodoOptions {
   title: string;
-  isCompleted: boolean;
+  description?: string;
+  isCompleted?: boolean;
 }
 
 // TODO maybe make a Todo class with static functions

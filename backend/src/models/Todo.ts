@@ -14,6 +14,10 @@ Todo.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   isCompleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,

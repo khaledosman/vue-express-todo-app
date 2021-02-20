@@ -58,9 +58,10 @@ export default {
     await this.fetchTodos()
   },
   methods: {
-    async createTodo (title) {
+    async createTodo ({ title, description }) {
       const newTodo = await createTodo({
         title,
+        description,
         isCompleted: false
       })
       this.todos = [...this.todos, newTodo]

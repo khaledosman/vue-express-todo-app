@@ -10,6 +10,7 @@
         />
         {{ todo.title }}
       </div>
+      <span class="description"> {{todo.description}} </span>
       <div class="content">
         <span class="icon" @click="showForm(todo)">
           <i class="icon">edit</i>
@@ -73,6 +74,11 @@ export default {
 }
 .card {
   border: solid 1px #e3e3e3;
+}
+
+.description {
+  color: gray;
+  font-size: 0.9rem;
 }
 
 .icon {

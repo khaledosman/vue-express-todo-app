@@ -14,10 +14,19 @@
               defaultValue
             />
           </div>
-          <!-- <div class="button">
+          <div class="field">
+            <input
+              v-model="todoForm.description"
+              style="text-align: center"
+              placeholder="Add todo description"
+              type="text"
+              ref="description"
+              defaultValue
+            />
+          </div>
+          <div class="button">
             <button class="button" @click="sendForm">Create</button>
-            <button class="button" @click="closeForm">Cancel</button>
-          </div>-->
+          </div>
         </form>
       </div>
     </div>
@@ -29,7 +38,8 @@ export default {
   data () {
     return {
       todoForm: {
-        title: ''
+        title: '',
+        description: ''
       }
     }
   },
@@ -39,8 +49,9 @@ export default {
 
       if (this.todoForm.title.length) {
         const title = this.todoForm.title
-        this.$emit('create-todo', title)
-        this.todoForm = { title: '' }
+        const description = this.todoForm.description
+        this.$emit('create-todo', { title, description })
+        this.todoForm = { title: '', description: '' }
       }
     }
   }
