@@ -13,38 +13,42 @@
   </div>
 </template>
 
-<script type = "text/javascript" >
-import Todo from "./Todo";
+<script lang="ts">
+import Todo from './Todo.vue'
 
 export default {
-  props: ["todos"],
+  props: {
+    todos: {
+      type: Array
+    }
+  },
   components: {
     Todo
   },
   methods: {
-    deleteTodo(todo) {
-      this.$emit("delete-todo", todo);
+    deleteTodo (todo) {
+      this.$emit('delete-todo', todo)
     },
-    completeTodo(todo) {
-      this.$emit("complete-todo", todo);
+    completeTodo (todo) {
+      this.$emit('complete-todo', todo)
     },
-    editTodo({ oldTodo, newTodo }) {
-      this.$emit("edit-todo", { oldTodo, newTodo });
+    editTodo ({ oldTodo, newTodo }) {
+      this.$emit('edit-todo', { oldTodo, newTodo })
     }
   },
   computed: {
-    completedTodos() {
+    completedTodos () {
       return this.todos.filter(todo => {
-        return todo.isCompleted;
-      }).length;
+        return todo.isCompleted
+      }).length
     },
-    pendingTodos() {
+    pendingTodos () {
       return this.todos.filter(todo => {
-        return !todo.isCompleted;
-      }).length;
+        return !todo.isCompleted
+      }).length
     }
   }
-};
+}
 </script>
 <style scoped>
 .list {

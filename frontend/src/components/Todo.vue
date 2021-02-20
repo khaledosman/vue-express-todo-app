@@ -35,36 +35,37 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       isEditing: false,
       todoForm: {
         ...this.todo
       }
-    };
+    }
   },
   methods: {
-    hideForm() {
-      this.isEditing = false;
+    hideForm () {
+      this.isEditing = false
     },
-    deleteTodo(todo) {
-      this.$emit("delete-todo", todo);
+    deleteTodo (todo) {
+      this.$emit('delete-todo', todo)
     },
-    editTodo(todo) {
-      this.$emit("edit-todo", {
+    editTodo (todo) {
+      this.$emit('edit-todo', {
         oldTodo: todo,
         newTodo: this.todoForm
-      });
-      this.hideForm();
+      })
+      this.hideForm()
     },
-    showForm(todo) {
-      this.isEditing = true;
+    showForm (todo) {
+      console.log(todo)
+      this.isEditing = true
     },
-    completeTodo(todo) {
-      this.$emit("complete-todo", todo);
+    completeTodo (todo) {
+      this.$emit('complete-todo', todo)
     }
   }
-};
+}
 </script>
 <style scoped>
 .is-completed {

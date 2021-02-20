@@ -26,25 +26,25 @@
 
 <script lang="ts">
 export default {
-  data() {
+  data () {
     return {
       todoForm: {
-        title: ""
+        title: ''
       }
-    };
+    }
   },
   methods: {
-    sendForm(e) {
-      e.preventDefault();
+    sendForm (e) {
+      e.preventDefault()
 
       if (this.todoForm.title.length) {
-        const title = this.todoForm.title;
-        this.$emit("create-todo", title);
-        this.todoForm = { title: "" };
+        const title = this.todoForm.title
+        this.$emit('create-todo', title)
+        this.todoForm = { title: '' }
       }
     }
   }
-};
+}
 </script>
 <style scoped>
 </style>
