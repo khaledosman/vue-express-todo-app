@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div>{{count}} Todos available, showing {{filteredTodos.length}}</div>
+    <h3>{{count}} Todos available, showing {{filteredTodos.length}}</h3>
     <div>
       <button
         class="fetch-more"
@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import TodoList from "./components/TodoList";
 import CreateTodo from "./components/CreateTodo";
 import {
@@ -119,7 +119,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

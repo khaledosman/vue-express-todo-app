@@ -27,9 +27,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  props: ["todo"],
+  props: {
+    todo: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       isEditing: false,
